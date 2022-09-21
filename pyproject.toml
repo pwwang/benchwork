@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "benchwork"
+version = "0.0.0"
+description = "A framework for benchmarking in python"
+authors = ["pwwang <pwwang@pwwang.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.group.dev.dependencies]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
