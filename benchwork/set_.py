@@ -60,11 +60,28 @@ class BenchSetTable(BenchSet, ABC):
 
     def run_cases(self):
         out = [
-            f"| |{self.__class__.header}|",
+            f"| |{self.header}|",
             f"|-|-----------------------|",
         ]
         for case in self.cases:
-            out.append(f"|{case.api.name}|{case.run()}|")
+            ret = str(case.run())
+            ret = ret.replace("\n", "<br />")
+            out.append(f"|{case.api.name}|{ret}|")
+        return "\n".join(out)
+
+
+class BenchSetSection(BenchSet, ABC):
+    """Test set with table as output"""
+
+    _SUBCLASSES = None
+
+    def run_cases(self):
+        out = []
+        for case in self.cases:
+            ret = str(case.run())
+            ret = ret.replace("\n", "<br />")
+            out.append(f"### {case.api.name}\n")
+            out.append(ret)
         return "\n".join(out)
 
 

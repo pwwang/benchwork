@@ -15,7 +15,6 @@ class BenchCase(Subclasses, ABC):
 
     This will be instantiated in to instances with different API classes
     """
-    __slots__ = ("args", "api")
     _SUBCLASSES = None
 
     def __init__(self, args: Namespace, api_class: Type[BenchAPI]) -> None:

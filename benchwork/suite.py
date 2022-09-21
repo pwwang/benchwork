@@ -49,7 +49,7 @@ class BenchSuite(ABC):
             from sys import stdout
             h = stdout
         else:
-            h = open(outfile, "r")
+            h = open(outfile, "w")
 
         try:
             h.write(f"# {title}\n\n")
