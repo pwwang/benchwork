@@ -3,4 +3,4 @@ from .case import BenchCase, BenchCaseVersion, BenchCaseSpeed
 from .set_ import BenchSet, BenchSetTable, BenchSetSpeed, BenchSetVersion
 from .suite import BenchSuite, run_suite
 
-__version__ = "0.0.0"
+__version__ = "0.0.1"
