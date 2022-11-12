@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractproperty
-from typing import TYPE_CHECKING, Type
+from typing import TYPE_CHECKING, Type, List
 
 from .api import BenchAPI
 from .case import BenchCaseVersion
@@ -61,12 +61,33 @@ class BenchSetTable(BenchSet, ABC):
     def run_cases(self):
         out = [
             f"| |{self.header}|",
-            f"|-|-----------------------|",
+            "|-|-----------------------|",
         ]
         for case in self.cases:
             ret = str(case.run())
             ret = ret.replace("\n", "<br />")
             out.append(f"|{case.api.name}|{ret}|")
+        return "\n".join(out)
+
+
+class BenchSetMultiColTable(BenchSet, ABC):
+    """Test set with multi-column table as output"""
+
+    _SUBCLASSES = None
+
+    @abstractproperty
+    def header(self) -> List[str]:
+        ...
+
+    def run_cases(self):
+        out = [
+            f"| |{'|'.join(self.header)}|",
+            f"|-|{'|'.join(['-'] * len(self.header))}|",
+        ]
+        for case in self.cases:
+            ret = case.run()
+            ret = [str(r).replace("\n", "<br />") for r in ret]
+            out.append(f"|{case.api.name}|{'|'.join(ret)}|")
         return "\n".join(out)
 
 
